@@ -23,6 +23,13 @@
 			"style": {
 				"navigationBarTitleText": "名人-杜旭晨20"
 			}
+		},
+		{
+			"path" : "pages/historyDetails/historyDetails",
+			"style" : 
+			{
+				"navigationBarTitleText" : ""
+			}
 		}
 	],
 

@@ -15,10 +15,9 @@
 				</view>
 			</swiper-item>
 		</swiper>
-
-		<!-- 添加标题 -->
-		<view class="title">长安美食</view>
-
+<view class="title">
+    长安美食
+  </view>
 		<!-- 顶部美食导航 -->
 		<view class="food-nav">
 			<view class="nav-item" 
@@ -44,9 +43,11 @@
 						<view class="food-intro">{{item.intro}}</view>
 					</view>
 				</view>
+				
 			</swiper-item>
 		</swiper>
 	</view>
+	
 </template>
 
 <script setup>
@@ -190,15 +191,10 @@ const handleSwiperChange = (e) => {
 	color: #666;
 	line-height: 1.6;
 }
-
-/* 添加标题样式 */
-.title {
-	text-align: center;
-	font-size: 36rpx;
-	font-weight: bold;
-	padding: 30rpx 0;
-	color: #333;
-	background-color: #fff;
-	border-bottom: 1rpx solid #eee;
-}
+	.title {
+		text-align: center;
+		margin: 20rpx;
+		font-size: 40rpx;
+		color: #888;
+	}
 </style>
