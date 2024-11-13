@@ -1,0 +1,67 @@
+{
+	"pages": [ 
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页-杜旭晨20"
+			}
+		},
+		{
+			"path": "pages/food/food",
+			"style": {
+				"navigationBarTitleText": "美食-杜旭晨20"
+			}
+		},
+		{
+			"path": "pages/history/history",
+			"style": {
+				"navigationBarTitleText": "历史-杜旭晨20"
+			}
+		},
+		{
+			"path": "pages/mingren/mingren",
+			"style": {
+				"navigationBarTitleText": "名人-杜旭晨20"
+			}
+		}
+	],
+
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#FF6700",
+		"backgroundColor": "#F8F8F8"
+	},
+
+	"uniIdRouter": {},
+	
+	"tabBar": {
+		"color": "#8a8a8a",
+		"selectedColor": "#FF6700",
+		"list": [
+			{
+				"text": "首页",
+				"pagePath": "pages/index/index",
+				"iconPath": "static/icon/home.png",
+				"selectedIconPath": "static/icon/home_selected.png"
+			},
+			{
+				"text": "美食",
+				"pagePath": "pages/food/food",
+				"iconPath": "static/icon/food.png",
+				"selectedIconPath": "static/icon/food_selected.png"
+			},
+			{
+				"text": "历史",
+				"pagePath": "pages/history/history",
+				"iconPath": "static/icon/history.png",
+				"selectedIconPath": "static/icon/history_selected.png"
+			},
+			{
+				"text": "名人",
+				"pagePath": "pages/mingren/mingren",
+				"iconPath": "static/icon/mingren.png",
+				"selectedIconPath": "static/icon/mingren_selected.png"
+			}
+		]
+	}
+}
