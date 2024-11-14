@@ -57,15 +57,16 @@ const tabIndex = ref(0)
 
 // 顶部轮播图数据
 const bannerList = ref([
-	{ img: "../../static/images/food1.jpg" },
-	{ img: "../../static/images/food4.jpg" },
-	{ img: "../../static/images/food5.jpg" },
-	{ img: "../../static/images/food6.jpg" },
-	{ img: "../../static/images/food7.jpg" },
-	{ img: "../../static/images/food8.jpg" }
+	{ img: "/static/images/food1.jpg" },
+	{ img: "/static/images/food4.jpg" },
+	{ img: "/static/images/food5.jpg" },
+	{ img: "/static/images/food6.jpg" },
+	{ img: "/static/images/food7.jpg" },
+	{ img: "/static/images/food8.jpg" }
 ])
 
-
+// 添加loading状态管理
+const isLoading = ref(false)
 
 // 美食列表数据
 const foodsList = ref([
@@ -96,14 +97,20 @@ const foodsList = ref([
 	}
 ])
 
-// 点击顶部导航切换
-const changeTab = (index) => {
-	tabIndex.value = index
+// 优化切换函数，添加加载状态
+const changeTab = async (index) => {
+	isLoading.value = true
+	try {
+		tabIndex.value = index
+	} finally {
+		isLoading.value = false
+	}
 }
 
-// 轮播滑动响应
+// 优化轮播切换处理
 const handleSwiperChange = (e) => {
-	tabIndex.value = e.detail.current
+	const { current } = e.detail
+	tabIndex.value = current
 }
 </script>
 
@@ -143,6 +150,7 @@ const handleSwiperChange = (e) => {
 .nav-item.active {
 	color: #f00;
 	font-weight: bold;
+	transition: all 0.3s ease;
 }
 
 .nav-item.active::after {
@@ -169,6 +177,7 @@ const handleSwiperChange = (e) => {
 .food-detail image {
 	width: 100%;
 	border-radius: 10rpx;
+	transition: opacity 0.3s ease;
 }
 
 .food-info {
@@ -197,4 +206,25 @@ const handleSwiperChange = (e) => {
 		font-size: 40rpx;
 		color: #888;
 	}
+
+/* 添加加载状态样式 */
+.loading {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+/* 添加响应式布局支持 */
+@media screen and (min-width: 768px) {
+	.food-nav {
+		max-width: 960px;
+		margin: 0 auto;
+	}
+	
+	.food-detail {
+		max-width: 960px;
+		margin: 0 auto;
+	}
+}
 </style>

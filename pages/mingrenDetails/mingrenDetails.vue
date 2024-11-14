@@ -1,55 +1,29 @@
 <template>
-	<view class="container">
-		<!-- 轮播图部分 -->
-		<swiper class="swiper" :indicator-dots="true" :autoplay="true" :interval="3000" :circular="true"
-			:duration="1000" indicator-color="#fff" indicator-active-color="#f00">
-			<swiper-item v-for="(item, index) in swiperList" :key="index">
-				<image :src="item.image" mode="aspectFill"></image>
-			</swiper-item>
-		</swiper>
-
-		<view class="title">
-			西安市（英文名：Xi’an City），别名 长安 、 镐京， 位于中国西北部、黄河流域中部 关中平原， 介于东经107°40′~109°49′，北纬33°42′~34°45′之间， 是 陕西省 辖地级市、 陕西省
-			省会 、 副省级市 、 特大城市 、 国家中心城市。
-		</view>
-
-		<view class="mingren-list">
-			<view class="item" v-for="(item, index) in mingrenList" :key="index" @tap="toDetails(index)">
-				<view class="img">
-					<image :src="item.pic" mode="aspectFill"></image>
-				</view>
-				<view class="text">{{item.name}}</view>
-			</view>
-		</view>
-	</view>
+  <view class="mingren-details">
+    <view v-if="loading" class="loading">
+      <uni-load-more status="loading"></uni-load-more>
+    </view>
+    
+    <template v-else>
+      <view class="title">
+        {{mingrenInfo.name}}
+      </view>
+      <view class="img">
+        <image :src="mingrenInfo.pic" mode="aspectFill"></image>
+      </view>
+      <view class="content">
+        {{mingrenInfo.msg}}
+      </view>
+    </template>
+  </view>
 </template>
 
 <script setup>
-	import {
-		ref
-	} from 'vue'
+import { onLoad } from '@dcloudio/uni-app'
+import { ref } from 'vue'
 
-	const swiperList = ref([{
-			image: '/static/images/p1.jpg'
-		},
-		{
-			image: '/static/images/p2.jpg'
-		},
-		{
-			image: '/static/images/p3.jpg'
-		},
-		{
-			image: '/static/images/p4.jpg'
-		},
-		{
-			image: '/static/images/p5.jpg'
-		},
-		{
-			image: '/static/images/p6.jpg'
-		}
-	])
-
-	const mingrenList = ref([{
+// 名人数据
+const mingrenInfos = ref([{
 			name: '霍去病',
 			pic: '/static/images/person1.jpg',
 			msg: '霍去病（公元前140年—公元前117年）是西汉时期杰出的军事家和民族英雄。他是汉武帝皇后卫子夫及大司马大将军卫青的外甥，同时也是大司马大将军霍光的同父异母兄长。霍去病以勇猛果断和用兵灵活多变著称，善于运用长途奔袭、快速突袭和大迂回、大穿插的战术。'
@@ -101,65 +75,71 @@
 		}
 	])
 
-	const toDetails = (index) => {
-		uni.navigateTo({
-			url: `/pages/mingrenDetails/mingrenDetails?index=${index}`
-		})
-	}
+const mingrenInfo = ref({})
+const loading = ref(true)
+
+onLoad((options) => {
+  const index = options.index
+  try {
+    uni.setNavigationBarTitle({
+      title: mingrenInfos.value[index].name
+    })
+    mingrenInfo.value = mingrenInfos.value[index]
+  } catch (error) {
+    uni.showToast({
+      title: '加载失败',
+      icon: 'none'
+    })
+  } finally {
+    loading.value = false
+  }
+})
 </script>
 
 <style>
-	.container {
-		width: 100%;
-	}
+.mingren-details {
+  padding: 20rpx;
+}
 
-	.swiper {
-		width: 100%;
-		height: 400rpx;
-	}
+.title {
+  font-size: 40rpx;
+  color: #333;
+  text-align: center;
+  margin: 20rpx 0 40rpx;
+  font-weight: bold;
+}
 
-	.swiper image {
-		width: 100%;
-		height: 100%;
-	}
+.img {
+  width: 100%;
+  height: 450rpx;
+  border-radius: 16rpx;
+  overflow: hidden;
+  box-shadow: 0 4rpx 12rpx rgba(0,0,0,0.1);
+}
 
-	.title {
-		text-align: center;
-		margin: 20rpx;
-		font-size: 25rpx;
-		color: #888;
-	}
+.img image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
-	.mingren-list {
-		padding: 20rpx;
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-	}
+.content {
+  margin: 40rpx 20rpx;
+  font-size: 32rpx;
+  color: #666;
+  line-height: 1.8;
+  text-indent: 2em;
+  letter-spacing: 2rpx;
+}
 
-	.mingren-list .item {
-		width: 48%;
-		margin-bottom: 20rpx;
-		background: #fff;
-		border-radius: 10rpx;
-		overflow: hidden;
-		box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.1);
-	}
-
-	.mingren-list .item .img {
-		width: 100%;
-		height: 200rpx;
-	}
-
-	.mingren-list .item .img image {
-		width: 100%;
-		height: 100%;
-	}
-
-	.mingren-list .item .text {
-		padding: 10rpx;
-		text-align: center;
-		font-size: 28rpx;
-		color: #333;
-	}
-</style>
+@media screen and (min-width: 768px) {
+  .mingren-details {
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  
+  .img {
+    height: 600rpx;
+  }
+}
+</style> 

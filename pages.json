@@ -25,22 +25,24 @@
 			}
 		},
 		{
-			"path" : "pages/historyDetails/historyDetails",
-			"style" : 
-			{
-				"navigationBarTitleText" : ""
+			"path": "pages/historyDetails/historyDetails",
+			"style": {
+				"navigationBarTitleText": "历史详情"
+			}
+		},
+		{
+			"path": "pages/mingrenDetails/mingrenDetails",
+			"style": {
+				"navigationBarTitleText": "名人详情"
 			}
 		}
 	],
-
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarBackgroundColor": "#FF6700",
 		"backgroundColor": "#F8F8F8"
 	},
-
 	"uniIdRouter": {},
-	
 	"tabBar": {
 		"color": "#8a8a8a",
 		"selectedColor": "#FF6700",

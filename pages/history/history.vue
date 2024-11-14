@@ -34,7 +34,7 @@
   </view>
   
   <view class="history-list">
-  			<view class="item" v-for="(item,index) in historys">
+  			<view class="item" v-for="(item,index) in historys" :key="index" @tap="toDetails(index)">
   				<view class="img">
   					<image :src="item.pic" mode="scaleToFill"></image>
   				</view>
@@ -69,6 +69,12 @@ const swiperList = ref([
 		{name:'回民巷',pic:'/static/images/h9.jpg'},
 		{name:'永兴坊',pic:'/static/images/h10.jpg'}	 
 	])
+
+const toDetails = (index) => {
+  uni.navigateTo({
+    url: `/pages/historyDetails/historyDetails?index=${index}`
+  })
+}
 </script>
 
 <style>
@@ -91,6 +97,7 @@ const swiperList = ref([
   font-weight: bold;
   padding: 20rpx;
   color: #333;
+  text-align: center;
 }
 
 .history-list {
